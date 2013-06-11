@@ -1,0 +1,24 @@
+# ~/.tmuxinator/development.yml
+# you can make as many tabs as you wish...
+
+project_name: RailsTutorial
+# project_root: . would set project root to current dir
+project_root: ~/Programming/Ruby/tutorials/hartl/sample_app
+socket_name: foo # Not needed.  Remove to use default socket
+rvm: 2.0.0@railstutorial_rails_4_0
+pre: "wmctrl -r :ACTIVE: -e 0,601,109,1326,973" #sudo /etc/rc.d/mysqld start
+tabs:
+  - editor:
+      layout: 742f,131x57,0,0{88x57,0,0,0,42x57,89,0[42x39,89,0,1,42x17,89,40,2]}
+      panes:
+        - vim 'Gemfile'
+        - rails c
+#        - #top
+#  - shell: git pull
+#  - database: rails db
+  - cli: 
+  - logs: tail -f log/development.log
+  - console: rails c
+  - server: rails s
+#  - capistrano:
+# - server: ssh me@myhost
