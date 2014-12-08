@@ -42,15 +42,13 @@ plugins=(git extract rvm git-extras fasd command-not-found)
 . $ZSH/oh-my-zsh.sh
 
 # Customize to your needs...
-
-# This loads RVM into a shell session.
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm"  
+ 
 # to use tmuxinator
 [[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && . $HOME/.tmuxinator/scripts/tmuxinator
 TMUX_COMPLETION_PATH=$(ruby -e "print Gem.bin_path('tmuxinator', 'tmuxinator_completion', '>= 0')" 2> "/dev/null") 
 [[ -s "$TMUX_COMPLETION_PATH" ]] && source "$TMUX_COMPLETION_PATH"
 ### Added by the Heroku Toolbelt
-export PATH="/usr/local/heroku/bin:$PATH"
+#export PATH="/usr/local/heroku/bin:$PATH"
 
 export EDITOR='vim'
 
@@ -59,7 +57,12 @@ stty -ixon
 
 PATH=$PATH:$HOME/.manymo/bin # Add manymo to PATH for scripting
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
+#PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # http://stackoverflow.com/questions/14181933/how-to-fix-zsh-correct-deploy-to-deploy-nyae
 alias rails='nocorrect rails'
+# hub
+export PATH="$PATH:$HOME/bin"
+alias git='hub'
+# This loads RVM into a shell session.
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && . "$HOME/.rvm/scripts/rvm" 

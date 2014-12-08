@@ -25,6 +25,7 @@ set nocompatible
     Bundle 'vim-ruby/vim-ruby'
     Bundle 'kana/vim-arpeggio'
     Bundle 'mileszs/ack.vim'
+    Bundle 'rking/ag.vim'
     Bundle 'vim-scripts/surround.vim'
     Bundle 'SirVer/ultisnips'
     Bundle 'Townk/vim-autoclose'
@@ -34,6 +35,9 @@ set nocompatible
     Bundle 'ap/vim-css-color'
     Bundle 'slim-template/vim-slim'
     Bundle 'sunaku/vim-ruby-minitest'
+    Bundle 'chrisbra/histwin.vim'
+    Bundle 'elixir-lang/vim-elixir'
+    Bundle 'KabbAmine/vCoolor.vim'
 
     " This is just for console vim
 "    Bundle 'vim-scripts/CSApprox'
@@ -81,7 +85,7 @@ set wrap
 set history=1000
 set wildmenu
 set wildmode=longest,list,full
-set wildignore=*.git,*.log,*.*~
+set wildignore=*.git,*.log,*.*~,tmp/*
 " }}} end wildmenu
 " persistent undo settings ---{{{
 set nobackup
@@ -130,7 +134,7 @@ nnoremap k gk
 nnoremap gk k 
 " save a keystroke to switch windows
 nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
+ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l        
 " save office-style; fewer keystrokes, but is it vim?
@@ -153,7 +157,6 @@ nnoremap <leader>v :tabedit $MYVIMRC<CR>
 " write a copy of the current buffer into a file w the same name - why?
 cnoremap w!! w !sudo tee % >/dev/null
 " command shortcuts
-nnoremap <leader>gi :Git init<CR>
 nnoremap <leader>bu :!bundle<CR>
 noremap <leader>f :CommandTFlush<CR>
 " arpeggio mappings
@@ -173,7 +176,7 @@ let g:arpeggio_timeoutlens = { 'h': 20}
 iabbrev adn and
 iabbrev teh the
 iabbrev fro for
-iabbrev @@ briandotgates@gmail.com
+" iabbrev @@ briandotgates@gmail.com
 iabbrev ccopy Copyright 2013 Brian Gates, all rights reserved.
 " }}} end abbreviations 
 " UltiSnips -----------------------------------------------------{{{
@@ -194,7 +197,7 @@ let g:AutoCloseExpandSpace = 0
 " Vimscript file settings ---------------------{{{
 augroup filetype_vim
   autocmd!
-  autocmd! BufWritePost .vimrc source %
+  autocmd BufWritePost .vimrc source %
   autocmd FileType vim setlocal foldmethod=marker
 augroup END
 " }}}
@@ -231,8 +234,6 @@ function! ToggleSpell()
 endfunction
 " }}} end function
 
-"inoremap <silent> # <Esc>:call RubyStringInterpolation()<CR>
-
 compiler rubyunit
 command! -bar -nargs=1 OpenURL :!sensible-browser <args> &
 function! OpenURL(url)
@@ -241,11 +242,6 @@ endfunction
 
 :command! -bar -nargs=0 Test !autotest &>tmp/autotest.out &
 
-function! RubyStringInterpolation()
-  "if :filetype =~ /ruby/
-    #
-  "endif
-endfunction
 augroup comments
   autocmd FileType javascript nnoremap <buffer> <localleader>c I//<Esc>
   autocmd FileType ruby       nnoremap <buffer> <localleader>c I#<Esc>
